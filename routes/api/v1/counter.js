@@ -4,6 +4,9 @@ const counterController = require('../../../controllers/api/v1/counter');
 
 /* /api/v1/counter */
 /* get request counter, verwijst naar getCounter fucntie in controller */
-router.get("/", counterController.getCounter);
+router.post("/", counterController.getCounter);
+
+
+
 
 module.exports = router;
