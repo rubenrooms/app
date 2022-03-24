@@ -9,10 +9,23 @@
 <body>
     <h2>Amount of clicks:</h2>
     <h1 id="counter"></h1>
+    <button id="btn">Send</button>
     
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io();
+  let count = 0;
+  const counter = document.getElementById("counter");
+  const btn = document.getElementById("btn");
+
+  btn.addEventListener("click", function(e) {
+    count++;
+    socket.emit("counter", count)
+  });
+
+  socket.on("counter", function(count){
+    counter.innerHTML=count;
+  });
 </script>
 </html>
