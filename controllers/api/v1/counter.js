@@ -1,14 +1,14 @@
-const { count } = require("rxjs");
 
 /* functie voor get request van de counter */
 const getCounter = (req, res) => {
-    let count =req.body.counter;
+    let count =req.body;
     res.json({
         "status": "succes",
-        body: {
-            counter: count
+        data: {
+            "counter": count
         }
     })
+    console.log(count);
 }
 
 
