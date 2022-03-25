@@ -1,4 +1,3 @@
-const { count } = require('console');
 var express = require('express');
 var router = express.Router();
 const app = express();
@@ -14,20 +13,19 @@ const io = new Server.Server(httpServer, {
   }
 });
 
-/* GET home page. */
-app.get('/', function(req, res, next) {
+router.post('/', function (req, res) {
   res.sendFile('counter.html', { root: 'public' });
+  let count = req.body.counter;
+  io.emit("counter", count);
+  console.log(count);
+  
 });
 
 io.on("connection", (socket) => {
   console.log('new connection');
+
   socket.on("disconnect", () => {
     console.log('disconnected')
-  });
-
-  socket.on("counter", count => {
-    io.emit("counter", count);
-    console.log("hey");
   });
 
 });

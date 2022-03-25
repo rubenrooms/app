@@ -1,11 +1,11 @@
 
 /* functie voor get request van de counter */
 const getCounter = (req, res) => {
-    let count =req.body;
+    var count =req.body.counter;
     res.json({
         "status": "succes",
         data: {
-            "counter": count
+            count
         }
     })
     console.log(count);
