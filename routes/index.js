@@ -3,8 +3,16 @@ var express = require('express');
 var router = express.Router();
 const app = express();
 const path = require('path');
-const server = require('http').createServer(app);
-const io = require("socket.io")(server);
+const http = require('http');
+
+const Server = require('socket.io');
+
+const httpServer = http.createServer();
+const io = new Server.Server(httpServer, {
+  cors: {
+    origin: "http://localhost:3901"
+  }
+});
 
 /* GET home page. */
 app.get('/', function(req, res, next) {
@@ -19,11 +27,12 @@ io.on("connection", (socket) => {
 
   socket.on("counter", count => {
     io.emit("counter", count);
+    console.log("hey");
   });
 
 });
 
-server.listen(8888, () => {
+io.listen(8888, () => {
   console.log('startennnn');
 });
 
